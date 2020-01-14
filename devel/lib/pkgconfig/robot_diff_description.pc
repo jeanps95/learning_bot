@@ -1,0 +1,8 @@
+prefix=/home/jean/learning_robot_ws/devel
+
+Name: robot_diff_description
+Description: Description of robot_diff_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jean/learning_robot_ws/devel/lib 
+Requires: 
