@@ -1,8 +1,0 @@
-prefix=/home/jean/learning_robot_ws/install
-
-Name: learning_robot
-Description: Description of learning_robot
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/jean/learning_robot_ws/install/lib 
-Requires: 

@@ -1,2 +1,0 @@
-learning_robot:robot_diff_description:robot_diff_gazebo
--DCATKIN_DEVEL_PREFIX=/home/jean/learning_robot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/jean/learning_robot_ws/install -G Unix Makefiles

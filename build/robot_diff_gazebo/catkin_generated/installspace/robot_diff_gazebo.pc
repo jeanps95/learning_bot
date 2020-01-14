@@ -1,8 +1,0 @@
-prefix=/home/jean/learning_robot_ws/install
-
-Name: robot_diff_gazebo
-Description: Description of robot_diff_gazebo
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/jean/learning_robot_ws/install/lib 
-Requires: 
