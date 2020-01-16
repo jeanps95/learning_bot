@@ -4,7 +4,7 @@
 ### The challenge
 Learnbotics is a platform that is being developed to teach robotics and does not yet have a simulation model available in Gazebo.
 
-![alt text](https://github.com/jeanps95/learning_bot/master/src/robot_diff_description/img/crafted.png)
+![](src/robot_diff_description/img/crafted.png)
 
 It's suggested to read the following tutorials as a first start on Gazebo robot constructions:
 
