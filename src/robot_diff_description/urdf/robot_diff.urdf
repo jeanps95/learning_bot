@@ -331,6 +331,7 @@
     <child link="Lidar"/>
     <origin rpy="0 0 1.571" xyz="0 0 0.0263688"/>
     <axis xyz="0 0 1"/>
+    <!-- <limit effort="-1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="10.0"/> -->
   </joint>
 
 
@@ -366,20 +367,20 @@
 
   <!-- RAY SENSOR CRAFT -->
   <gazebo reference="Sensor">
-    <sensor type="ray" name="head_hokuyo_sensor">
-      <pose>0 0 0 0 0 1.571</pose>
+    <sensor type="ray" name="head_sensor">
+      <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
       <update_rate>40</update_rate>
       <ray>
         <scan>
           <!-- <horizontal>
-            <samples>1</samples>
+            <samples>180</samples>
             <resolution>1</resolution>
-            <min_angle>1.571</min_angle>
-            <max_angle>1.572</max_angle>
+            <min_angle>0</min_angle>
+            <max_angle>3.1415</max_angle>
           </horizontal> -->
           <vertical>
-            <samples>32</samples>
+            <samples>16</samples>
             <resolution>1</resolution>
             <min_angle>0</min_angle>
             <max_angle>0.18622663</max_angle>
@@ -396,8 +397,8 @@
           <stddev>0.01</stddev>
         </noise>
       </ray>
-      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-        <topicName>/diff/laser/scan</topicName>
+      <plugin name="gazebo_ros_head_controller" filename="libgazebo_ros_velodyne_laser.so">
+        <topicName>/diff/scan</topicName>
         <frameName>Sensor</frameName>
       </plugin>
     </sensor>

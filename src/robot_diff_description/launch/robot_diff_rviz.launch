@@ -3,6 +3,8 @@
   <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find robot_diff_description)/urdf/robot_diff.urdf'" />
 
+  <!-- <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 1 map Sensor 100" /> -->
+
   <!-- send fake joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="TRUE"/>
