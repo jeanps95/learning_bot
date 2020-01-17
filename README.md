@@ -1,5 +1,5 @@
 # learning_bot
-## Learning Bot - Tutorial
+## Learning Bot
 
 ### The challenge
 Learnbotics is a platform that is being developed to teach robotics and does not yet have a simulation model available in Gazebo.
@@ -37,3 +37,34 @@ http://gazebosim.org/tutorials?cat=guided_i&tut=guided_i6
 #### Velodyne plugin by Dataspeed Inc.
 
 https://bitbucket.org/DataspeedInc/velodyne_simulator/src/master/
+
+#### Differential drive plugin by OpenSourceRoboticsFundation.
+
+https://bitbucket.org/osrf/gazebo/src/default/plugins/DiffDrivePlugin.hh
+
+https://bitbucket.org/osrf/gazebo/src/default/plugins/DiffDrivePlugin.cc
+
+## How to simulate
+
+Clone the workspace on your desired location.
+
+### Terminal 1
+
+$ cd learning_bot
+$ catkin_make
+$ source devel/setup.bash
+$ roslaunch robot_diff_gazebo gazebo.launch
+
+This terminal opens the Gazebo software, so it can simulate the model on a empty world and put models and meshes for the robot to interact.
+
+### Terminal 2
+
+$ cd learning_bot
+$ source devel/setup.bash
+$ roslaunch robot_diff_description robot_diff_rviz.launch
+
+This terminal opens the RViz software, that is a graphic representation of the Gazebo world. There you can see the links and joints of robot, and the representation of camera and lidar.
+
+## Edit preferences
+
+You can open the urdf file in /src/robot_diff_description/urdf/robot_diff.urdf and change some properties, like angular velocity of lidar, or number of samples of the laserscan from lidar. They are referenced on their own <gazebo> block.
