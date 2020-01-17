@@ -94,6 +94,30 @@
     <axis xyz="0 -1 0" />
   </joint>
 
+    <!--DIFFERENTIAL DRIVER CONTROL-->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_diff_drive.so">
+      <robotNamespace>/</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+      <alwaysOn>true</alwaysOn>
+      <legacyMode>false</legacyMode>
+      <updateRate>40</updateRate>
+      <leftJoint>Body_to_Left_Wheel</leftJoint>
+      <rightJoint>Body_to_Right_Wheel</rightJoint>
+      <wheelSeparation>0.10966201</wheelSeparation>
+      <wheelDiameter>0.075</wheelDiameter>
+      <torque>20</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <publishWheelTF>true</publishWheelTF>
+      <publishOdomTF>true</publishOdomTF>
+      <publishWheelJointState>true</publishWheelJointState>
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin>
+  </gazebo>
+
+
 
   <!--SPHERE CRAFT-->
   <link name="Sphere">
@@ -247,28 +271,6 @@
     </sensor>
   </gazebo>
 
-  <!--DIFFERENTIAL DRIVER CONTROL-->
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_diff_drive.so">
-      <robotNamespace>/</robotNamespace>
-      <legacyModeNS>true</legacyModeNS>
-      <alwaysOn>true</alwaysOn>
-      <legacyMode>false</legacyMode>
-      <updateRate>40</updateRate>
-      <leftJoint>Body_to_Left_Wheel</leftJoint>
-      <rightJoint>Body_to_Right_Wheel</rightJoint>
-      <wheelSeparation>0.10966201</wheelSeparation>
-      <wheelDiameter>0.075</wheelDiameter>
-      <torque>20</torque>
-      <commandTopic>cmd_vel</commandTopic>
-      <odometryTopic>odom</odometryTopic>
-      <odometryFrame>odom</odometryFrame>
-      <publishWheelTF>true</publishWheelTF>
-      <publishOdomTF>true</publishOdomTF>
-      <publishWheelJointState>true</publishWheelJointState>
-      <robotBaseFrame>base_link</robotBaseFrame>
-    </plugin>
-  </gazebo>
 
     
   <!--LIDAR FIXED PART CRAFT-->
@@ -326,12 +328,12 @@
     </inertial>
   </link>
 
-  <joint name="Cylinder_to_Lidar" type="continuous">
+  <joint name="Cylinder_to_Lidar" type="revolute">
     <parent link="Cylinder"/>
     <child link="Lidar"/>
     <origin rpy="0 0 1.571" xyz="0 0 0.0263688"/>
     <axis xyz="0 0 1"/>
-    <!-- <limit effort="-1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="10.0"/> -->
+    <limit effort="1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="10.0"/>
   </joint>
 
 
@@ -402,6 +404,13 @@
         <frameName>Sensor</frameName>
       </plugin>
     </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_velodyne_controller" filename="libvelodyne_rotational_control.so">
+    <joint_d>Cylinder_to_Lidar</joint_d>
+    <velocity>10.0</velocity>
+    </plugin>
   </gazebo>
 
 
