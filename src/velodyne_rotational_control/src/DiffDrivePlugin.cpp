@@ -29,15 +29,16 @@ enum {LEFT};
 /////////////////////////////////////////////////
 DiffDrivePlugin::DiffDrivePlugin()
 {
-  this->wheelSpeed[LEFT] = 1.0;
-  this->wheelSeparation = 1.0;
-  this->wheelRadius = 1.0;
+  // this->velocity = 1.0;
+  // this->wheelSeparation = 1.0;
+  // this->wheelRadius = 1.0;
 }
 
 /////////////////////////////////////////////////
 void DiffDrivePlugin::Load(physics::ModelPtr _model,
                            sdf::ElementPtr _sdf)
 {
+  
   this->model = _model;
 
   this->node = transport::NodePtr(new transport::Node());
@@ -66,6 +67,10 @@ void DiffDrivePlugin::Load(physics::ModelPtr _model,
   //         << _sdf->GetElement("right_joint")->Get<std::string>() << "]\n";
 
 
+  this->velocity = _sdf->GetElement("velocity")->Get<double>();
+
+  this->wheelRadius = _sdf->GetElement("radius")->Get<double>();
+
 
   this->updateConnection = event::Events::ConnectWorldUpdateBegin(
           std::bind(&DiffDrivePlugin::OnUpdate, this));
@@ -81,7 +86,7 @@ void DiffDrivePlugin::Init()
       this->leftJoint->GetChild());
 
   // This assumes that the largest dimension of the wheel is the diameter
-  this->wheelRadius = 0.015587625;
+  // this->wheelRadius = 0.015587625;
 }
 
 /////////////////////////////////////////////////
@@ -92,7 +97,7 @@ void DiffDrivePlugin::OnVelMsg(ConstPosePtr &_msg)
   vr = _msg->position().x();
   va =  msgs::ConvertIgn(_msg->orientation()).Euler().Z();
 
-  this->wheelSpeed[LEFT] = vr + va * this->wheelSeparation / 2.0;
+  this->velocity = vr + va;
   // this->wheelSpeed[RIGHT] = vr - va * this->wheelSeparation / 2.0;
 }
 
@@ -114,7 +119,7 @@ void DiffDrivePlugin::OnUpdate()
   common::Time stepTime = currTime - this->prevUpdateTime;
   */
 
-  double leftVelDesired = (this->wheelSpeed[LEFT] / this->wheelRadius);
+  double leftVelDesired = (this->velocity / this->wheelRadius);
   // double rightVelDesired = (this->wheelSpeed[RIGHT] / this->wheelRadius);
 
   this->leftJoint->SetVelocity(0, leftVelDesired);

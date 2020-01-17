@@ -336,6 +336,16 @@
     <limit effort="1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="10.0"/>
   </joint>
 
+  <!--LIDAR ROTATIONAL DRIVER CONTROL-->
+
+  <gazebo>
+    <plugin name="gazebo_ros_velodyne_controller" filename="libvelodyne_rotational_control.so">
+    <joint_d>Cylinder_to_Lidar</joint_d>
+    <velocity>0.02</velocity>
+    <radius>0.015587625</radius>
+    </plugin>
+  </gazebo>
+
 
     <!--LIDAR SENSOR PART CRAFT-->
   <link name="Sensor">
@@ -406,12 +416,7 @@
     </sensor>
   </gazebo>
 
-  <gazebo>
-    <plugin name="gazebo_ros_velodyne_controller" filename="libvelodyne_rotational_control.so">
-    <joint_d>Cylinder_to_Lidar</joint_d>
-    <velocity>10.0</velocity>
-    </plugin>
-  </gazebo>
+
 
 
 
